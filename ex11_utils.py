@@ -94,12 +94,12 @@ def find_length_n_words(n: int, board: Board, words: Iterable[str]) -> List[Path
 
 def find_length_n_word(n:int,board:Board,word:str)->List[Path]:
     
-    def dfs(coor,word:str,path:set=set()): 
+    def dfs(coor,word:str,visited:set=set()): 
         nonlocal board        
         if not in_bound(coor,board):
             return []
         
-        if coor in path:
+        if coor in visited:
             return []
         
         inner=board[coor[0]][coor[1]]
@@ -108,22 +108,25 @@ def find_length_n_word(n:int,board:Board,word:str)->List[Path]:
             return []
         
         updated_word=word[len(inner):]
+
         #base case
         if updated_word == "":
-            return [list(path)]
+            return [[coor]]
         
     
         #dfs algorithim
-        path.add(coor)
-        result=[]
+        visited.add(coor)
+        results=[]
+        
         #will return [] in coor
         for i in range(-1,2):
              for j in range(-1,2):
                 new_coor = coor[0] + i, coor[1] + j
-                result_from=dfs(new_coor,path)
-                result.extend(result_from)          
-        path.remove(coor)
-        return result_from
+                result_from=dfs(new_coor,updated_word,visited)
+                for result in result_from:
+                    result.extend(result_from)          
+        visited.remove(coor)
+        return results
 
          
     
