@@ -146,7 +146,7 @@ def max_score_paths(board,words):
             filtered.append(path)
         return filtered    
     
-    max_n = len(board) * len(board[0])
+    max_n = max(map(lambda x:len(x),words))
     list_max_paths = []
     for n in range(max_n,0,-1):
         all_paths_len_n = find_length_n_paths(n,board,words)
