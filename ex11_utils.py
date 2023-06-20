@@ -136,7 +136,7 @@ def find_length_n_words_helper(n: int, board: Board, words: list[str], path: lis
 def max_score_paths(board,words):
     existed=set()
     
-    def filter_words(paths,board):
+    def not_used_words(paths,board):
         filtered=[]
         for path in paths:
             word = path_to_word(board,path)
@@ -146,11 +146,18 @@ def max_score_paths(board,words):
             filtered.append(path)
         return filtered    
     
+    def filter_words(words,used_words):
+        set_used_words = set(used_words)
+        new_words=list(filter(lambda x: x in set_used_words,words))
+        return new_words
+
     max_n = max(map(lambda x:len(x),words))
     list_max_paths = []
     for n in range(max_n,0,-1):
         all_paths_len_n = find_length_n_paths(n,board,words)
-        list_max_paths.extend(filter_words(all_paths_len_n,board))
+        filtered_words=not_used_words(all_paths_len_n,board)
+        list_max_paths.extend(filtered_words)
+        words = filter_words(words,filtered_words)
     
     return list_max_paths
 
