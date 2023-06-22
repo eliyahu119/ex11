@@ -4,7 +4,7 @@ import time
 BUTTON_HOVER_COLOR = 'gray'
 REGULAR_COLOR = 'lightgray'
 BUTTON_ACTIVE_COLOR = 'slateblue'
-
+##TEST
 BUTTON_STYLE = {"font": ("Courier", 30),
                 "borderwidth": 1,
                 "relief": tk.RAISED,
