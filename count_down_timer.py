@@ -56,7 +56,7 @@ class CountdownTimer:
             str: The remaining time in the format 'mm:ss'.
         """
         if self.__start_time is None:
-            return self.format_time(self.__duration)
+            return self.__duration
         elapsed_time = time.time() - self.__start_time
         remaining_time = max(self.__duration - elapsed_time, 0)
         return remaining_time
