@@ -31,7 +31,7 @@ class CountdownTimer:
         elapsed_time = time.time() - self.__start_time
         self.__start_time = None
         remaining_time = max(self.__duration - elapsed_time, 0)
-        return self.__format_time(remaining_time)
+        return remaining_time
 
     def is_running(self):
         """
@@ -56,12 +56,13 @@ class CountdownTimer:
             str: The remaining time in the format 'mm:ss'.
         """
         if self.__start_time is None:
-            return self.__format_time(self.__duration)
+            return self.format_time(self.__duration)
         elapsed_time = time.time() - self.__start_time
         remaining_time = max(self.__duration - elapsed_time, 0)
-        return self.__format_time(remaining_time)
-
-    def __format_time(self, time_in_seconds):
+        return remaining_time
+    
+    @staticmethod
+    def format_time(time_in_seconds):
         """
         Formats the time in seconds as 'mm:ss'.
 
