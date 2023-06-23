@@ -163,5 +163,11 @@ def max_score_paths(board,words):
 
    
     
-
+def load_words():
+    #load words as set, and do it safle please
+    try:
+        pass
+    except Exception:
+        #return default
+        return set()
     
