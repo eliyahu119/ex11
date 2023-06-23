@@ -24,7 +24,7 @@ class CountdownTimer:
         Stops the countdown timer and returns the remaining time.
 
         Returns:
-            float: The remaining time in seconds.
+            str: The remaining time in the format 'mm:ss'.
         """
         if self.__start_time is None:
             raise ValueError("Timer is not running.")
