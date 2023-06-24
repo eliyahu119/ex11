@@ -16,23 +16,22 @@ ROWS =4
 COLS=4
 class Game:
     buttons: Dict[str, tk.Button] = {}
-    def __init__(self,table):
+    def __init__(self,table):   #basic init
         self.duration =180
         self.root = tk.Tk()
         self.root.title(ROOT_NAME)
         self.table=table
 
         self.create_gui()
-#---------------------------------
+#---------------------------------create all formats
+    #create all
     def create_gui(self):
-        # Create a timer frame for the timer
         self.create_upper_frame()
-        # create a label for word
         self.create_display_label()
-        # create a frame for buttons
         self.create_buttons_grid(self.table)
-        # create bottum format
         self.create_buttom_format()
+
+    # Create a timer and score frame
     def create_upper_frame(self):
         self.upper_frame = tk.Frame(self.root)
         self.upper_frame.pack(pady=10, fill=tk.BOTH)
@@ -43,11 +42,13 @@ class Game:
         self.score_label = tk.Label(self.upper_frame, text="x", font=("Helvetica", 24, "bold"), justify='r')
         self.score_label.pack(side=tk.RIGHT)
 
+    # create a label for word
     def create_display_label(self):
         self._display_label = tk.Label(self.root, font=("Courier", 30),
                                        bg="lightgray", width=23, relief="ridge")
         self._display_label.pack(side=tk.TOP, fill=tk.BOTH)
 
+    # create a frame for buttons
     def create_buttons_grid(self,table):
         self.button_grid_frame = tk.Frame(self.root)
         self.button_grid_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
@@ -55,6 +56,7 @@ class Game:
         self.create_buttons_in_lower_frame(table)
         self.root.bind("<Key>", self._key_pressed)
 
+    # create buttom format
     def create_buttom_format(self):
         self.buttom_frame = tk.Frame(self.root)
         self.buttom_frame.pack(fill=tk.BOTH)
@@ -65,8 +67,8 @@ class Game:
         self.used_words = tk.Label(self.buttom_frame,justify='l',text = "as ed",font=("Courier", 30),
                                        bg="lightgray", width=23, relief="ridge")
         self.used_words.pack(side=tk.LEFT,fill=tk.BOTH,expand='true')
-#-------------------------------------------------
-
+#-------------------------------------------------#
+    #timer
     def update_timer(self):
         remaining_time = self.end_time - time.time()
         if remaining_time > 0:
@@ -76,33 +78,41 @@ class Game:
             self.timer_label.after(1000, self.update_timer)
         else:
             self.timer_label.config(text="Time's up!")
-    #def update_score(self,pts):
-
+    #run methos(incomplete)
     def run(self):
         self.end_time = time.time() + self.duration
         self.update_timer()
         self.root.mainloop()
         self.root.mainloop()
-    def set_display(self, display_text: str) -> None:
-        self._display_label["text"] = display_text
+
 #---------------------------------buttons grid and button settings
+
+
     def create_buttons_in_lower_frame(self,table) -> None:
-        for i in range(len(table[0])):
+        #create grid table
+        for i in range(COLS):
             tk.Grid.columnconfigure(self.button_grid_frame, i, weight=1)  # type: ignore
 
-        for i in range(len(table)):
+        for i in range(ROWS):
             tk.Grid.rowconfigure(self.button_grid_frame, i, weight=1)  # type: ignore
-        self.buttons = []
+
+
+        self.grid_buttons = []
 
         for row in range(ROWS):
             row_buttons = []
             for col in range(COLS):
+                #create button and place in grid
                 button = tk.Button(self.button_grid_frame, text=table[row][col].upper(), **BUTTON_STYLE,command= lambda r=row,c=col: self._display_label.config(text=self.table[r][c]))
                 button.grid(row=row, column=col, sticky=tk.NSEW)
+                #make buttons shine if mouse on him
                 self.change_button_color_on_hover(button,BUTTON_HOVER_COLOR,REGULAR_COLOR)
+                #append button
                 row_buttons.append(button)
-            self.buttons.append(row_buttons)
+            self.grid_buttons.append(row_buttons)
 
+
+    #make button shine when mouse on him
     def change_button_color_on_hover(self,button, hover_color, regular_color):
         def on_enter(event):
             button.config(background=hover_color)
@@ -112,9 +122,9 @@ class Game:
 
         button.bind("<Enter>", on_enter)
         button.bind("<Leave>", on_leave)
+
+    #button press when pressing button
     def _key_pressed(self, event: Any) -> None:
-        """the callback method for when a key is pressed.
-        It'll simulate a button press on the right button."""
         if event.char in self._buttons:
             self._simulate_button_press(event.char)
         elif event.keysym == "Return":
