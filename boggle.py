@@ -24,6 +24,8 @@ class Boggle:
         return self.__score
     
     def __add_to_score(self,n):
+        if not self.__score :
+            self.__score = 0
         self.__score+=n
         
     def end_game(self):
@@ -41,7 +43,7 @@ class Boggle:
         return self.__board[x][y]
       
     def add_to_current_path(self,x,y):
-         #add to path
+        #add to path
         self.__path.add_to_path((x,y))
 
 
@@ -58,10 +60,7 @@ class Boggle:
     def get_current_time(self)->str:
         # return timer
         return self.__timer.get_remaining_time()
-        
-    def current_word_pogress(self)->str:
-        pass
-    
+            
     def start_game(self)->None:
         self.__timer.start()
         self.__init_game_board()
@@ -80,8 +79,7 @@ class Boggle:
         self.__used_words.add(word)
         self.__add_to_score(len(current)**2)
         return word
-        # __used_words.set()
-        # kpass
+
         
 
 if __name__ == "__main__":
