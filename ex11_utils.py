@@ -173,4 +173,17 @@ def load_words(file_location):
     except Exception:
         #return default
         return set()
-    
+
+def format_time(time_in_seconds):
+        """
+        Formats the time in seconds as 'mm:ss'.
+
+        Parameters:
+            time_in_seconds (float): The time in seconds.
+
+        Returns:
+            str: The formatted time in the format 'mm:ss'.
+        """
+        minutes = int(time_in_seconds // 60)
+        seconds = int(time_in_seconds % 60)
+        return f"{minutes:02d}:{seconds:02d}"
