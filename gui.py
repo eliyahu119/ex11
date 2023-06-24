@@ -67,7 +67,7 @@ class Game:
         self.save_word_button = tk.Button(self.buttom_frame,**BUTTON_STYLE,text= "Save\nword",command= self.save_word)
         self.save_word_button.pack(side=tk.LEFT)
 
-        self.used_words = tk.Label(self.buttom_frame,justify='l',text = "",font=("Courier", 30),
+        self.used_words = tk.Label(self.buttom_frame,justify='l',text = "",font=("Courier", 8),
                                        bg="lightgray", width=23, relief="ridge")
         self.used_words.pack(side=tk.LEFT,fill=tk.BOTH,expand='true')
 
@@ -87,7 +87,7 @@ class Game:
             self.timer_label.config(text="time: {:02d}:{:02d}".format(minutes, seconds))
             self.timer_label.after(1000, self.update_timer)
         else:
-            self.timer_label.config(text="Time's up!")
+            self.__root.destroy()
     def update_score(self):
         self.score_label.config(text= "score:{:2d}".format(self.__boggle.score))
 
@@ -120,8 +120,8 @@ class Game:
             row_buttons = []
             for col in range(COLS):
                 #create button and place in grid
-                button = tk.Button(self.button_grid_frame, text=self.__boggle.get_value_by_location(row,col).upper(), **BUTTON_STYLE,
-                                   command= lambda r=row,c=col: self.grid_button_click(r,c))
+                button = tk.Button(self.button_grid_frame, text=self.__boggle.get_value_by_location(row,col).upper(),
+                                   **BUTTON_STYLE, command= lambda r=row,c=col: self.grid_button_click(r,c))
                 button.grid(row=row, column=col, sticky=tk.NSEW)
                 #make buttons shine if mouse on him
                 self.change_button_color_on_hover(button,BUTTON_HOVER_COLOR,REGULAR_COLOR)
@@ -148,6 +148,7 @@ class Game:
         button.bind("<Leave>", on_leave)
 #--------------------------------------------------------
 
-b= Boggle()
-a=Game(b)
-a.run()
+if __name__ == '__main__':
+    b = Boggle()
+    a = Game(b)
+    a.run()
