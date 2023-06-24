@@ -1,6 +1,7 @@
+import copy
 class Path:
     def __init__(self):
-        self.__coords_lst = []
+        self.__path = []
         self.__path_word = ""
 
     def add_char(self, coordinate, board):
@@ -12,12 +13,10 @@ class Path:
         # check if the button is disabled.
         return coordinate in self.__path
 
-    def get_path_coords(self):
-        return self.__coords_lst
+    def get_path(self):
+        return copy.deepcopy(self.__path)
 
     def get_path_word(self):
-        return self.__path_word
-
-
+        return copy.deepcopy(self.__path_word)
 
 

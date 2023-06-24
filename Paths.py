@@ -1,3 +1,6 @@
+import copy
+
+
 class Paths:
 
     def __init__(self):
@@ -13,7 +16,12 @@ class Paths:
 
     def clear_paths(self):
         self.__paths = []
-        self.__used_words = []
+
+    def get_paths(self):
+        return copy.deepcopy(self.__paths)
+
+    def get_used_words(self):
+        return copy.deepcopy(self.__used_words)
 
 
 
