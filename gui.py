@@ -70,7 +70,7 @@ class Game:
                                             text="Save\nword", command=self.__save_word)
         self.__save_word_button.pack(side=tk.LEFT)
     def __create_used_words_label(self):
-        self.__used_words = tk.Label(self.__buttom_frame, justify='l', text ="", font=("Courier", 8),
+        self.__used_words = tk.Label(self.__buttom_frame, justify='l', text ="", font=("Courier", 20),anchor = 'n',
                                      bg="lightgray", width=23, relief="ridge")
         self.__used_words.pack(side=tk.LEFT, fill=tk.BOTH, expand='true')
 
@@ -95,11 +95,13 @@ class Game:
         self.__score_label.config(text="score:{:2d}".format(self.__boggle.score))
 
     def __update_used_words_screen(self):
-        str = ""
+        str,counter = "",0
         lst = self.__boggle.used_words
         for word in lst:
-            str += word
-            str += " "
+            if counter%5 == 0: #more than 5 words in line
+                str += "\n"
+            str += (word + " ")
+            counter += 1
         self.__used_words.config(text=str)
 
     def __update_current_word(self):
