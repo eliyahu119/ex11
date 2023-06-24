@@ -1,7 +1,7 @@
 from count_down_timer import CountdownTimer
 from boggle_board_randomizer import randomize_board
 import ex11_utils
-
+from path import Path
 FILE_LOCATION=r"boggle_dict.txt"
 GAME_DURATION=3*60
 
@@ -50,8 +50,9 @@ class Boggle:
             return True
         if self.score == self.__max_score:
             return True
-
-        # pass
+        if self.__end_game:
+            return True
+        return False
 
     def get_current_formmated_time(self)->str:
         # return timer
