@@ -1,6 +1,7 @@
 from typing import Dict, List, Callable, Any
 import tkinter as tk
 import time
+ROOT_NAME = "Boggle"
 BUTTON_HOVER_COLOR = 'gray'
 REGULAR_COLOR = 'lightgray'
 BUTTON_ACTIVE_COLOR = 'slateblue'
@@ -13,19 +14,18 @@ BUTTON_STYLE = {"font": ("Courier", 30),
 class Game:
     buttons: Dict[str, tk.Button] = {}
     def __init__(self,table):
-        self.duration = 180  # 3 minutes (in seconds)
-
+        self.duration =180
         self.root = tk.Tk()
-        self.root.title("Boogle")
+        self.root.title(ROOT_NAME)
 
         # Create a timer frame for the timer
         self.upper_frame = tk.Frame(self.root)
         self.upper_frame.pack(pady=10)
 
-        self.timer_label = tk.Label(self.upper_frame, text="03:00", font=("Helvetica", 24, "bold"))
+        self.timer_label = tk.Label(self.upper_frame, text="", font=("Helvetica", 24, "bold"))
         self.timer_label.pack(side=tk.LEFT,padx=100)
 
-        self.score_label = tk.Label(self.upper_frame, text="score: 0", font=("Helvetica", 24, "bold"))
+        self.score_label = tk.Label(self.upper_frame, text="", font=("Helvetica", 24, "bold"))
         self.score_label.pack(side=tk.RIGHT,padx=100)
 
 
@@ -76,10 +76,13 @@ class Game:
         for x in range(len(table)):
             for y in range(len(table[0])):
                 self._make_button(table[x][y],x,y)
+    def callback(self,event):
+        self._display_label.config()
+
 
     def _make_button(self, button_char: str, row: int, col: int,
                      rowspan: int = 1, columnspan: int = 1) -> tk.Button:
-        button = tk.Button(self._lower_frame, text=button_char, **BUTTON_STYLE)
+        button = tk.Button(self._lower_frame, text=button_char, **BUTTON_STYLE,command = callback)
         button.grid(row=row, column=col, rowspan=rowspan, columnspan=columnspan, sticky=tk.NSEW)
         self.buttons[button_char] = button
 
@@ -128,6 +131,7 @@ a = Game([
     [ "C", "D", "E", "F"],
     ["G", "H", "I", "J", "K", "L"],
     ["M", "N", "O", "P", "Q", "R"],
+    ["C", "D", "E", "F"]
 
 ])
 a.run()
