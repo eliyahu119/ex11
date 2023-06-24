@@ -78,8 +78,10 @@ class Boggle:
         if word in self.__used_words:
             return None
         self.__used_words.add(word)
+        self.__add_to_score(len(current)**2)
         return word
-
+        # __used_words.set()
+        # kpass
         
 
 if __name__ == "__main__":
