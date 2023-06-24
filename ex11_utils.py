@@ -163,9 +163,12 @@ def max_score_paths(board,words):
 
    
     
-def load_words():
-    #load words as set, and do it safle please
+def load_words(file_location):
     try:
+        with open(file_location, "r") as file:
+            lines = file.readlines()
+            stripped_lines=map(lambda x: x.strip(),lines)
+            return set(stripped_lines)
         pass
     except Exception:
         #return default
