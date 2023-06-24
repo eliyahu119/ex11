@@ -14,13 +14,21 @@ class Boggel:
     def score(self):
         return self.__score
     
-    def __init_game_board():
+    def __init_game_board(self):
         #create a matrix, for the game board
         pass
 
-    def init_word_dict():
-        #self.__words=None #create utils, that get the words safely.
-        pass
+    def init_word_dict(self):
+        try:
+            words_set = {}
+            file = open(sys.argv[1], "r")
+            index_list = file.read().split('\n')
+            file.close()
+            for word in index_list:
+                words_set.add(word)
+            return words_set
+        except:
+            return {}
 
     def get_value_by_location(self,x,y):
         #returns the location value base
@@ -57,4 +65,6 @@ class Boggel:
         #init score
         #init i
         pass
+    
+    
     
