@@ -7,8 +7,6 @@ class Path:
     def add_to_path(self,coor):
         self.__path.append(coor)
 
-    def valid_path(self,board,words):
-        ex11_utils.is_valid_path(board,self.__path,words)
 
     def get_path(self):
         return list(self.__path)
