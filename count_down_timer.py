@@ -15,8 +15,8 @@ class CountdownTimer:
         """
         Starts the countdown timer.
         """
-        if self.__start_time is not None:
-            raise ValueError("Timer is already running.")
+        # if self.__start_time is not None:
+        #     raise ValueError("Timer is already running.")
         self.__start_time = time.time()
 
     def stop(self):
