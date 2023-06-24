@@ -54,7 +54,7 @@ class Game:
         self.button_grid_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         self.create_buttons_in_lower_frame(table)
-        self.root.bind("<Key>", self._key_pressed)
+
 
     # create buttom format
     def create_buttom_format(self):
@@ -122,34 +122,6 @@ class Game:
 
         button.bind("<Enter>", on_enter)
         button.bind("<Leave>", on_leave)
-
-    #button press when pressing button
-    def _key_pressed(self, event: Any) -> None:
-        if event.char in self._buttons:
-            self._simulate_button_press(event.char)
-        elif event.keysym == "Return":
-            self._simulate_button_press("=")
-    def _simulate_button_press(self, button_char: str) -> None:
-        """make a button light up as if it is pressed,
-        and then return to normal"""
-        button = self._buttons[button_char]
-        button["bg"] = BUTTON_ACTIVE_COLOR
-
-        def return_button_to_normal() -> None:
-            # find which widget the mouse is pointing at:
-            x, y = self._main_window.winfo_pointerxy()
-            widget_under_mouse = self._main_window.winfo_containing(x, y)
-            # change color accordingly:
-            if widget_under_mouse is button:
-                button["bg"] = BUTTON_HOVER_COLOR
-            else:
-                button["bg"] = REGULAR_COLOR
-
-        button.invoke()  # type: ignore
-        button.after(100, func=return_button_to_normal)
-
-        def reset():
-            root = tk.Tk()
 #--------------------------------------------------------
 
 a = Game([
