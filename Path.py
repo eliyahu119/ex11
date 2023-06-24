@@ -19,4 +19,8 @@ class Path:
     def get_path_word(self):
         return copy.deepcopy(self.__path_word)
 
+    def clear_word(self):
+        self.__path = []
+        self.__path_word= ""
+
 
