@@ -8,7 +8,7 @@ EXIT="Exit"
 class OpeningScreen:
     def __init__(self):
         self.__create_page()
-
+        self.__start_events:list=list
 
     def __create_page(self):
         self.__root = tk.Tk()
@@ -29,9 +29,12 @@ class OpeningScreen:
         self.__start_button.pack(pady=10,padx=10)
         self.__start_button.place(relx=0.5, rely=0.5, anchor='center')
 
-
+    def add_events_to_start(self,func:function):
+        self.__start_events.append(func)
+        
     def start_game(self):
-        pass
+        for event in self.__start_events:
+            event()
 
     def run(self):
         self.__root.mainloop()
