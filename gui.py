@@ -1,7 +1,6 @@
-import string
+
 from typing import Dict, List, Callable, Any
 import tkinter as tk
-import time
 
 from boggle import Boggle
 
@@ -75,6 +74,7 @@ class Game:
         self.__used_words.pack(side=tk.LEFT, fill=tk.BOTH, expand='true')
 
     def __save_word(self):
+        "click on the save word button"
         self.__boggle.submit_word()
         self.__current_word = ""
         self.__update_current_word()
