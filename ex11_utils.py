@@ -232,42 +232,53 @@ def find_length_n_words_helper(n: int, board: Board, words: list[str], path: lis
 
 
 def max_score_paths(board,words):
-    existed=set()
+    """
+    Finds the maximum score paths on the board using the provided words.
+
+    Args:
+        board (Board): The board represented as a two-dimensional structure.
+        words (Iterable[str]): An iterable of words.
+
+    Returns:
+        List[Path]: A list of maximum score paths on the board.
+
+    """
+    words:set=set(words)
     
-    def not_used_words(paths,board):
-        filtered=[]
+    def filter_words_set(paths,board):
+        nonlocal words
         for path in paths:
-            word = path_to_word(board,path)
-            if word in existed:
-                continue
-            existed.add(word)
-            filtered.append(path)
-        return filtered    
-    
-    def filter_words(words,used_words):
-        set_used_words = set(used_words)
-        new_words=list(filter(lambda x: x in set_used_words,words))
-        return new_words
-
-    max_n = max(map(lambda x:len(x),words))
+            word=path_to_word(board,path)    
+            words.discard(word)
+          
     list_max_paths = []
-    for n in range(max_n,0,-1):
+    n=math.inf
+    while True:
+        max_n = max(map(lambda x:len(x),words)) if words else 0
+        n = min(max_n,n-1) 
+        if n <= 0 :
+            break
         all_paths_len_n = find_length_n_paths(n,board,words)
-        filtered_words=not_used_words(all_paths_len_n,board)
-        list_max_paths.extend(filtered_words)
-        words = filter_words(words,filtered_words)
-    
+        list_max_paths.extend(all_paths_len_n)
+        filter_words_set(all_paths_len_n,board)
     return list_max_paths
-
-   
     
 def load_words(file_location):
+    """
+    Loads words from a file located at the specified location.
+
+    Args:
+        file_location (str): The file location.
+
+    Returns:
+        set: A set of words loaded from the file.
+
+    """
     try:
         with open(file_location, "r") as file:
             lines = file.readlines()
             stripped_lines=map(lambda x: x.strip(),lines)
             return set(stripped_lines)
-        pass
     except Exception:
         #return default
         return set()
