@@ -1,13 +1,15 @@
 import tkinter as tk
 import time
 
+from boggle import Boggle
+
 TITLE="Boggle"
 OPENING_STRING="GOOD GAME!"
 PLAY_AGAIN="Play again?"
 EXIT="Exit"
 
 class EndScreen:
-    def __init__(self,game):
+    def __init__(self,game:Boggle):
         self.__create_page()
         self.__game=game
         # self.__start_events:list=list()
@@ -30,7 +32,7 @@ class EndScreen:
         self.__label_text.pack(pady=20)
     def __create_score_text(self):
         self.__label_score_text = tk.Label(
-            self.__root, text="Your score is {:2d}".format(25), font=("Arial", 24))
+            self.__root, text="Your score is {:2d}".format(self.__game.score), font=("Arial", 24))
         self.__label_score_text.pack(pady=20)
     def __create_buttons(self):
         self.__start_button = tk.Button(
