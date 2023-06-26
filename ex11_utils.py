@@ -8,10 +8,35 @@ Path = List[Tuple[int, int]]
 
 
 def distance(coor1, coor2):
+    """
+    Calculates the Euclidean distance between two points in a two-dimensional space.
+
+    Args:
+        coor1 (tuple): A tuple representing the coordinates of the first point (x1, y1).
+        coor2 (tuple): A tuple representing the coordinates of the second point (x2, y2).
+
+    Returns:
+        float: The Euclidean distance between the two points.
+
+    """
     return math.sqrt((coor1[0]-coor2[0])**2 + (coor1[1]-coor2[1])**2)
 
 
 def is_valid_path(board: Board, path: Path, words: Iterable[str]) -> Optional[str]:
+    """
+    Checks if a given path is valid on the board and matches a word from the provided iterable of words.
+
+    Args:
+        board (Board): The board represented as a two-dimensional structure.
+        path (Path): The path to be checked, represented as a sequence of coordinates.
+        words (Iterable[str]): An iterable of words to check against.
+
+    Returns:
+        Optional[str]: The word formed by the path if it is valid and matches a word from the iterable.
+                       Returns None if the path is invalid or doesn't match any word.
+
+    """
+    
     if not path:
         return None
     
@@ -43,6 +68,17 @@ def is_valid_path(board: Board, path: Path, words: Iterable[str]) -> Optional[st
 
 
 def in_bound(coordinate, board):
+    """
+    Checks if a given coordinate is within the boundaries of the board.
+
+    Args:
+        coordinate (tuple): A tuple representing the coordinate to be checked (x, y).
+        board (list): A two-dimensional list representing the board.
+
+    Returns:
+        bool: True if the coordinate is within the board boundaries, False otherwise.
+
+    """
     if not 0 <= coordinate[0] < len(board):
         return False
     if not 0 <= coordinate[1] < len(board[0]):
@@ -51,6 +87,18 @@ def in_bound(coordinate, board):
 
 
 def find_length_n_paths(n: int, board: Board, words: Iterable[str]) -> List[Path]:
+    """
+    Finds all paths of length n on the board that match words from the provided iterable.
+
+    Args:
+        n (int): The length of paths to search for.
+        board (Board): The board represented as a two-dimensional structure.
+        words (Iterable[str]): An iterable of words to search for.
+
+    Returns:
+        List[Path]: A list of paths of length n that match words from the iterable.
+
+    """
     results = []
     words = list(sorted(words))
     for i, row in enumerate(board):
@@ -61,6 +109,19 @@ def find_length_n_paths(n: int, board: Board, words: Iterable[str]) -> List[Path
 
 
 def find_length_n_paths_helper(n: int, board: Board, words: list[str], path: list = []):
+    """
+    Helper function for finding paths of length n on the board that match words from the provided iterable.
+
+    Args:
+        n (int): The length of paths to search for.
+        board (Board): The board represented as a two-dimensional structure.
+        words (list[str]): A list of words to search for.
+        path (list): Optional. The current path being explored.
+
+    Yields:
+        list: A valid path of length n that matches a word from the iterable.
+
+    """
     if not in_bound(path[-1], board):
         return
 
@@ -89,10 +150,33 @@ def find_length_n_paths_helper(n: int, board: Board, words: list[str], path: lis
             path.pop()
 
 def path_to_word(board, path):
+    """
+    Converts a given path on the board to a word.
+
+    Args:
+        board (Board): The board represented as a two-dimensional structure.
+        path (list): The path represented as a list of coordinate tuples.
+
+    Returns:
+        str: The word formed by traversing the path on the board.
+
+    """
     return "".join([board[i][j] for i, j in path])
 
 
 def find_length_n_words(n: int, board: Board, words: Iterable[str]) -> List[Path]:
+    """
+    Finds all words of length n on the board that exist in the provided iterable.
+
+    Args:
+        n (int): The length of words to search for.
+        board (Board): The board represented as a two-dimensional structure.
+        words (Iterable[str]): An iterable of words to search for.
+
+    Returns:
+        List[Path]: A list of paths representing the locations of the found words.
+
+    """
     results = []
     words = filter(lambda x: len(x) == n, words)
     words = sorted(words)
@@ -105,6 +189,20 @@ def find_length_n_words(n: int, board: Board, words: Iterable[str]) -> List[Path
 
 
 def find_length_n_words_helper(n: int, board: Board, words: list[str], path: list = []):
+    """
+    Helper function for finding words of length n on the board that exist in the provided iterable.
+
+    Args:
+        n (int): The length of words to search for.
+        board (Board): The board represented as a two-dimensional structure.
+        words (list[str]): A list of words to search for.
+        path (list): Optional. The current path being explored.
+
+    Yields:
+        list: A valid path representing the location of a found word.
+
+    """
+    
     if not in_bound(path[-1], board):
         return
 
