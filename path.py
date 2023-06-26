@@ -1,4 +1,3 @@
-import ex11_utils
 
 class Path:
     def __init__(self):
