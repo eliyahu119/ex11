@@ -17,6 +17,7 @@ class EndScreen:
         self.__root.title(TITLE)
         self.__root.geometry("500x400")  # Set the width and height of the window
         self.__create_text()
+        self.__create_score_text()
         self.__create_buttons()
         self.__root.protocol("WM_DELETE_WINDOW", self.on_closing)
     
@@ -27,7 +28,10 @@ class EndScreen:
         self.__label_text = tk.Label(
             self.__root, text=OPENING_STRING, font=("Arial", 24))
         self.__label_text.pack(pady=20)
-
+    def __create_score_text(self):
+        self.__label_score_text = tk.Label(
+            self.__root, text="Your score is {:2d}".format(25), font=("Arial", 24))
+        self.__label_score_text.pack(pady=20)
     def __create_buttons(self):
         self.__start_button = tk.Button(
             self.__root, text=PLAY_AGAIN, font=("Arial", 24), command=self.start_game)
