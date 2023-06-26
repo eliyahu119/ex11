@@ -2,13 +2,15 @@ import tkinter as tk
 import time
 
 TITLE="Boggle"
-OPENING_STRING="WELCOME TO BOGGLE"
-START="Start"
+OPENING_STRING="GOOD GAME!"
+PLAY_AGAIN="Play again?"
 EXIT="Exit"
-class OpeningScreen:
-    def __init__(self):
+
+class EndScreen:
+    def __init__(self,game):
         self.__create_page()
-        self.__start_events:list=list()
+        self.__game=game
+        # self.__start_events:list=list()
 
     def __create_page(self):
         self.__root = tk.Tk()
@@ -28,24 +30,25 @@ class OpeningScreen:
 
     def __create_buttons(self):
         self.__start_button = tk.Button(
-            self.__root, text=START, font=("Arial", 24), command=self.start_game)
+            self.__root, text=PLAY_AGAIN, font=("Arial", 24), command=self.start_game)
         self.__start_button.pack(pady=10,padx=10)
         self.__start_button.place(relx=0.5, rely=0.5, anchor='center')
 
-    def add_events_to_start(self,func):
-        self.__start_events.append(func)
+
         
-    def start_game(self):
+    def start_game(self):  
         self.close_window()
         
     def close_window(self):
         self.__root.destroy()
     
+        # self.__root.destroy()
+
     def run(self):
         self.__root.mainloop()
 
 
 if __name__ == '__main__':
-    opening_screen = OpeningScreen()
+    opening_screen = EndScreen(None)
     opening_screen.run()
 

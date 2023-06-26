@@ -3,7 +3,9 @@ from boggle_board_randomizer import randomize_board
 import ex11_utils
 from path import Path
 FILE_LOCATION=r"boggle_dict.txt"
-GAME_DURATION=3*60
+# GAME_DURATION=3*60
+GAME_DURATION=10
+
 
 class Boggle:
     """
@@ -32,7 +34,7 @@ class Boggle:
         self.__end_game=False
         self.__path:Path=Path()
         self.__used_words=set()
-
+        self.__max_score = float("inf")
     @property 
     def used_words(self):
         """
@@ -152,7 +154,7 @@ class Boggle:
         """
         self.__init_game_board()
         self.__score=0 
-        self.__max_score=len(ex11_utils.max_score_paths(self.__board,self.__ini_words))
+        # self.__max_score=len(ex11_utils.max_score_paths(self.__board,self.__ini_words))
         self.__used_words=set()
         self.__timer.start()
 
