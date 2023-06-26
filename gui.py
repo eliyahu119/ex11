@@ -1,5 +1,5 @@
 import tkinter as tk
-from boggle import Boggle
+from boggle_logic import Boggle
 
 ROOT_NAME = "Boggle"
 BUTTON_HOVER_COLOR = 'gray'
@@ -18,7 +18,7 @@ class Game:
     """The class get a Boggle API and make the game visible"""
     """And make the game able to be played by running the program"""
 
-    def __init__(self, boggle: Boggle):  # basic init
+    def __init__(self, boggle: Boggle):
         """Init of the display and get the API"""
         self.__boggle = boggle
         self.__current_word = ""
@@ -28,14 +28,16 @@ class Game:
     # create all
     def __create_gui(self):
         """Summerize the create of the whole screen view"""
-        self.__root = tk.Tk()
-        self.__root.title(ROOT_NAME)
+        self.__create_root()
         self.__create_upper_frame()
         self.__create_display_label()
         self.__create_buttons_grid()
         self.__create_buttom_format()
-
-    # Create a timer and score frame
+    def __create_root(self):
+        """Creates the main root of the game"""
+        self.__root = tk.Tk()
+        self.__root.title(ROOT_NAME)
+        self.__root.protocol("WM_DELETE_WINDOW", self.on_closing)
     def __create_upper_frame(self):
         """Creates the upper frame(the place for the timer and the score)"""
         self.__upper_frame = tk.Frame(self.__root)
@@ -54,13 +56,13 @@ class Game:
                                       text="score: 0", font=("Helvetica", 24, "bold"), justify='left')
         self.__score_label.pack(side=tk.LEFT)
 
-    def __create_display_label(self):  # create a label for current word
+    def __create_display_label(self):
         """Creates the label to display the current word that the user creates"""
         self.__display_label = tk.Label(self.__root, font=("Courier", 30),
                                         bg="lightgray", width=23, relief="ridge")
         self.__display_label.pack(side=tk.TOP, fill=tk.BOTH)
 
-    def __create_buttons_grid(self):  # create a frame for buttons
+    def __create_buttons_grid(self):
         """Creates the table of the game buttons that represent chars(and QU)"""
         self.__button_grid_frame = tk.Frame(self.__root)
         self.__button_grid_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
@@ -111,6 +113,7 @@ class Game:
         self.__root.destroy()
 
     def on_closing(self):
+        """Closing root"""
         quit()
 
     def __update_score(self):
@@ -181,8 +184,4 @@ class Game:
 
 # --------------------------------------------------------
 
-if __name__ == '__main__':
-    b = Boggle()
-    b.start_game()
-    a = Game(b)
-    a.run()
+
