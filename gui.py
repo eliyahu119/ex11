@@ -1,5 +1,5 @@
 import tkinter as tk
-from boggle import Boggle
+from boggle_logic import Boggle
 
 ROOT_NAME = "Boggle"
 BUTTON_HOVER_COLOR = 'gray'
@@ -184,8 +184,4 @@ class Game:
 
 # --------------------------------------------------------
 
-if __name__ == '__main__':
-    b = Boggle()
-    b.start_game()
-    a = Game(b)
-    a.run()
+

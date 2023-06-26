@@ -1,7 +1,5 @@
 import tkinter as tk
-import time
-
-from boggle import Boggle
+from boggle_logic import Boggle
 
 TITLE="Boggle"
 END_GOOD_STRING="GOOD GAME!"

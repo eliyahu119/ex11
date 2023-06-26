@@ -1,4 +1,4 @@
-from boggle import Boggle 
+from boggle_logic import Boggle 
 from gui import Game as MainScreen
 from open_screen import OpeningScreen
 from end_screen import EndScreen
