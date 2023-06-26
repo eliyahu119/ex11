@@ -1,6 +1,7 @@
 
 from typing import Dict, List, Callable, Any
 import tkinter as tk
+from ex11_utils import format_time
 
 from boggle import Boggle
 
@@ -19,7 +20,6 @@ COLS=4
 class Game:
     def __init__(self,boggle:Boggle):   #basic init
         self.__boggle=boggle
-        self.__boggle.start_game()
         self.__current_word = ""
         self.__create_gui()
 
@@ -90,7 +90,11 @@ class Game:
             self.__timer_label.config(text="time: {:02d}:{:02d}".format(minutes, seconds))
             self.__timer_label.after(1000, self.__update_timer)
         else:
-            self.__root.destroy()
+            self.quit()
+    
+    def quit(self):
+        self.__root.destroy()
+    
     def __update_score(self):
         self.__score_label.config(text="score:{:2d}".format(self.__boggle.score))
 
@@ -109,7 +113,6 @@ class Game:
 
     #run methos(incomplete)
     def run(self):
-        "run the game"
         self.__update_timer()
         self.__root.mainloop()
 
@@ -156,5 +159,6 @@ class Game:
 
 if __name__ == '__main__':
     b = Boggle()
+    b.start_game()
     a = Game(b)
     a.run()

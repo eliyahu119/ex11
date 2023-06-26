@@ -150,11 +150,11 @@ class Boggle:
         Starts the game by initializing the board, score, and timer.
 
         """
-        self.__timer.start()
         self.__init_game_board()
         self.__score=0 
         self.__max_score=len(ex11_utils.max_score_paths(self.__board,self.__ini_words))
         self.__used_words=set()
+        self.__timer.start()
 
     def submit_word(self):
         """
