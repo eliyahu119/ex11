@@ -3,7 +3,7 @@ from boggle_board_randomizer import randomize_board
 import ex11_utils
 from path import Path
 FILE_LOCATION=r"boggle_dict.txt"
-GAME_DURATION=3*60
+GAME_DURATION=180
 
 
 

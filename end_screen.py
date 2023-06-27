@@ -55,7 +55,7 @@ class EndScreen:
         self.__label_score_text = tk.Label(
             self.__root,font=("Arial", 24))
         self.__label_score_text.config(text="The words that you found:\n" + self.__game.used_words_to_string())
-        self.__label_score_text.pack(pady=10)
+        self.__label_score_text.pack(pady=40,side=tk.BOTTOM)
     def start_game(self):
         """Start game method"""
         self.close_window()
