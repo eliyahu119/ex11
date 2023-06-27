@@ -55,8 +55,3 @@ class OpeningScreen:
         """Run"""
         self.__root.mainloop()
 
-
-if __name__ == '__main__':
-    opening_screen = OpeningScreen()
-    opening_screen.run()
-
