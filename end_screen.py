@@ -22,6 +22,7 @@ class EndScreen:
         self.__create_score_text()
         self.__create_text()
         self.__create_buttons()
+        self.__create_used_words_label()
         self.__root.protocol("WM_DELETE_WINDOW", self.on_closing)
     
     def on_closing(self):
@@ -44,13 +45,17 @@ class EndScreen:
             self.__root, text="Your score is {:2d}".format(self.__game.score), font=("Arial", 24))
         self.__label_score_text.pack(pady=10)
     def __create_buttons(self):
-        """Crreate the play again button"""
+        """Create the play again button"""
         self.__start_button = tk.Button(
             self.__root, text=PLAY_AGAIN, font=("Arial", 24), command=self.start_game)
         self.__start_button.pack(pady=10,padx=10)
         self.__start_button.place(relx=0.5, rely=0.5, anchor='center')
 
-
+    def __create_used_words_label(self):
+        self.__label_score_text = tk.Label(
+            self.__root,font=("Arial", 24))
+        self.__label_score_text.config(text="The words that you found:\n" + self.__game.used_words_to_string())
+        self.__label_score_text.pack(pady=10)
     def start_game(self):
         """Start game method"""
         self.close_window()

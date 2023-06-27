@@ -122,14 +122,7 @@ class Game:
 
     def __update_used_words_screen(self):
         """Updates the used words screen and limit them to 5 words in line"""
-        string, counter = "", 0
-        lst = self.__boggle.used_words
-        for word in lst:
-            if counter % 5 == 0:  # more than 5 words in line
-                string += "\n"
-            string += (word + " ")
-            counter += 1
-        self.__used_words.config(text=string)
+        self.__used_words.config(text=self.__boggle.used_words_to_string())
 
     def __update_current_word(self):
         """Updates the current word display"""

@@ -177,6 +177,16 @@ class Boggle:
         self.__add_to_score(len(current)**2)
         return word
 
+    def used_words_to_string(self):
+        """Returns the string of used words"""
+        string, counter = "", 0
+        lst = list(self.__used_words)
+        for word in lst:
+            if counter % 5 == 0:  # more than 5 words in line
+                string += "\n"
+            string += (word + " ")
+            counter += 1
+        return string
         
 
 if __name__ == "__main__":
