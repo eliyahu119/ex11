@@ -10,8 +10,8 @@ def create_zip(files, folder_path, zip_name):
 
 # Example usage
 files =['boggle_logic.py', 'boggle.py', 'count_down_timer.py', 'end_screen.py',
-        'ex11_utils.py', 'gui.py.py',"open_screen.py ","path.py"
-  'boggle_dict.txt', 'boggle_board_randomizer.py',"AUTHORS"]
+        'ex11_utils.py', 'gui.py',"open_screen.py ","path.py"
+  ,'boggle_dict.txt', 'boggle_board_randomizer.py',"AUTHORS"]
 # Example usage
 current_folder = os.getcwd()  # Get the current working directory
 zip_name = os.path.join(current_folder, 'ex11.zip')
