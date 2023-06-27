@@ -51,13 +51,14 @@ class EndScreen:
         """Create the play again button"""
         self.__start_button = tk.Button(
             self.__root, text=PLAY_AGAIN, font=("Arial", 24), command=self.start_game)
-        self.__start_button.pack(pady=10, padx=10)
+        self.__start_button.pack(padx=10)
         self.__start_button.place(relx=0.5, rely=0.5, anchor='center')
 
     def __create_used_words_label(self):
+        """Create used word label,8 words in line"""
         self.__label_score_text = tk.Label(
             self.__root, font=("Arial", 16))
-        self.__label_score_text.config(text="The words that you found:\n" + self.__game.used_words_to_string())
+        self.__label_score_text.config(text="The words that you found:\n" + self.__game.used_words_to_string(8))
         self.__label_score_text.pack(pady=40, side=tk.BOTTOM)
 
     def start_game(self):
