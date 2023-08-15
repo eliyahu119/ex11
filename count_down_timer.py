@@ -15,8 +15,8 @@ class CountdownTimer:
         """
         Starts the countdown timer.
         """
-        if self.__start_time is not None:
-            raise ValueError("Timer is already running.")
+        # if self.__start_time is not None:
+        #     raise ValueError("Timer is already running.")
         self.__start_time = time.time()
 
     def stop(self):
@@ -31,7 +31,7 @@ class CountdownTimer:
         elapsed_time = time.time() - self.__start_time
         self.__start_time = None
         remaining_time = max(self.__duration - elapsed_time, 0)
-        return self.__format_time(remaining_time)
+        return remaining_time
 
     def is_running(self):
         """
@@ -56,21 +56,9 @@ class CountdownTimer:
             str: The remaining time in the format 'mm:ss'.
         """
         if self.__start_time is None:
-            return self.__format_time(self.__duration)
+            return self.__duration
         elapsed_time = time.time() - self.__start_time
         remaining_time = max(self.__duration - elapsed_time, 0)
-        return self.__format_time(remaining_time)
+        return remaining_time
+    
 
-    def __format_time(self, time_in_seconds):
-        """
-        Formats the time in seconds as 'mm:ss'.
-
-        Parameters:
-            time_in_seconds (float): The time in seconds.
-
-        Returns:
-            str: The formatted time in the format 'mm:ss'.
-        """
-        minutes = int(time_in_seconds // 60)
-        seconds = int(time_in_seconds % 60)
-        return f"{minutes:02d}:{seconds:02d}"
